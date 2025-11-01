@@ -1,0 +1,34 @@
+name: GreenCart Agent CI/CD
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run backend tests
+        run: pytest tests/
+      - name: Build Docker image
+        run: docker build -t greencart-agent .
+      - name: Push to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_PASS }}
+      - name: Docker push
+        run: |
+          docker tag greencart-agent ${{ secrets.DOCKERHUB_USER }}/greencart-agent:latest
+          docker push ${{ secrets.DOCKERHUB_USER }}/greencart-agent:latest
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy step here
+        run: echo "Deployment pipeline here (SSH, GCP, AWS, or K8s)"
