@@ -1,7 +1,3 @@
-Here’s a professional README.md for your GreenCart Agent repository. This includes an overview, getting started, a rich TODO checklist, and a dedicated section for proposed new features and improvements. The structure is inspired by best open source README practices.[1][7]
-
-***
-
 # GreenCart Agent
 
 GreenCart Agent is an open-source, fully autonomous booking assistant and microservice stack for organic food marketplaces. It combines product discovery, conversational Q&A (with RAG), session-long personalization, and end-to-end order APIs wrapped in a modern Streamlit UI and FastAPI backend.
