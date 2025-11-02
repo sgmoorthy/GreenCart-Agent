@@ -32,3 +32,8 @@ jobs:
     steps:
       - name: Deploy step here
         run: echo "Deployment pipeline here (SSH, GCP, AWS, or K8s)"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest
